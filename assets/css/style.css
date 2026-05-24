@@ -491,6 +491,31 @@ p { margin: 0 0 1rem 0; color: var(--ink); }
 
 .card.data:hover::before { transform: scaleX(1); }
 
+.card.data .card-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.card.data .card-head .card-icon {
+  margin-bottom: 0 !important;
+  margin-top: 0;
+}
+
+.card.data .card-head-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.card.data .card-head-text .card-tag {
+  margin: 0 0 0.3rem 0;
+}
+
+.card.data .card-head-text h3 {
+  margin: 0;
+}
+
 .card.data .card-icon {
   width: 46px;
   height: 46px;
@@ -500,7 +525,7 @@ p { margin: 0 0 1rem 0; color: var(--ink); }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   position: relative;
   flex-shrink: 0;
   transition: background 0.25s ease, color 0.25s ease, transform 0.3s ease;
@@ -2068,6 +2093,212 @@ p { margin: 0 0 1rem 0; color: var(--ink); }
   height: 8px;
   background: var(--blue);
   border-radius: 50%;
+}
+
+/* ===== Mobile cleanup ===== */
+
+@media (max-width: 860px) {
+  /* Constrain decorative blobs so they don't drag layout */
+  .hero::after {
+    width: 320px;
+    height: 320px;
+    top: -12%;
+    right: -30%;
+  }
+  .highlight-block::after {
+    width: 140px;
+    height: 140px;
+    bottom: -40px;
+    right: -25px;
+  }
+
+  /* Disable hover-only effects on touch widths */
+  .card.data:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+    border-color: var(--line);
+  }
+  .card.data:hover::before { transform: scaleX(0); }
+  .card.data:hover .card-icon {
+    background: var(--blue-soft);
+    color: var(--blue);
+    transform: none;
+  }
+  .step:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--line);
+  }
+  .stat-item:hover { background: transparent; }
+  .stat-item:hover .stat-icon {
+    background: var(--blue-soft);
+    color: var(--blue);
+  }
+  .research-teaser:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--line);
+  }
+  .research-teaser:hover .teaser-link { gap: 0.35rem; }
+  .btn:hover { transform: none; }
+  .btn::after { display: none; }
+
+  /* Section tag should never wrap-break on the deco line */
+  .section-tag,
+  .feature-row .feature-eyebrow {
+    flex-wrap: nowrap;
+  }
+
+  /* Hero stat strip: stack with hairline separators */
+  .hero .stat-strip {
+    grid-template-columns: 1fr;
+  }
+  .hero .stat-item {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .stat-item:last-child { border-bottom: none; }
+
+  /* CTA banner button row */
+  .cta-banner > div:last-child .btn { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 720px) {
+  /* Bento feature card readability */
+  .bento .b-feature { min-height: auto; padding: 1.6rem; }
+  .bento .b-feature h3 { font-size: 1.3rem; }
+  .bento .b-feature .feature-stat { font-size: 2rem; }
+
+  /* Section heading tighter */
+  .section-head { margin-bottom: 1.6rem; }
+}
+
+@media (max-width: 640px) {
+  /* Hero copy & spacing */
+  .hero { padding: 2.4rem 0 2rem 0; }
+  .hero h1 { font-size: 1.7rem; line-height: 1.2; }
+  .hero-lead { font-size: 0.96rem; }
+  .hero .eyebrow { margin-bottom: 0.9rem; }
+  .hero .btn-row { gap: 0.6rem; margin-top: 1.3rem; }
+  .hero .btn-row .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1.2rem;
+  }
+  .hero::after {
+    width: 240px;
+    height: 240px;
+    top: -8%;
+    right: -40%;
+  }
+
+  /* Container & sections */
+  .container { padding: 0 1rem; }
+  .section { padding: 2.6rem 0; }
+
+  /* Cards smaller padding & icon */
+  .card.data { padding: 1.3rem; }
+  .card.data .card-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.8rem;
+  }
+  .card.data .card-icon svg { width: 18px; height: 18px; }
+  .card.data h3 { font-size: 1.1rem; }
+
+  /* Steps */
+  .step { padding: 1.3rem; }
+  .step .step-num { width: 38px; height: 38px; font-size: 1rem; margin-bottom: 0.8rem; }
+
+  /* Highlight block */
+  .highlight-block { padding: 1.4rem; gap: 0.4rem; }
+  .highlight-quote-mark { font-size: 2.8rem; line-height: 0.8; }
+  .highlight-block .highlight-text { font-size: 1rem; }
+
+  /* Info panel */
+  .info-panel { padding: 1.4rem; }
+  .info-panel h3 { font-size: 1.18rem; }
+  .info-panel .info-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    padding-top: 1.2rem;
+    margin-top: 1.2rem;
+  }
+  .info-panel .info-stats .info-stat-value { font-size: 1.25rem; }
+  .info-panel .info-stats .info-stat-label { font-size: 0.78rem; }
+
+  /* Cred strip */
+  .cred-strip {
+    gap: 0.6rem;
+    padding: 0.9rem 1rem;
+  }
+  .cred-strip .cred-item { font-size: 0.7rem; letter-spacing: 0.04em; }
+  .cred-strip .cred-dot { width: 4px; height: 4px; }
+
+  /* Stat item */
+  .stat-item { padding: 1rem 1.2rem; }
+  .stat-item .stat-icon { width: 32px; height: 32px; margin-bottom: 0.6rem; }
+  .stat-item .stat-icon svg { width: 16px; height: 16px; }
+  .stat-item .stat-value { font-size: 1.2rem; }
+  .stat-item .stat-label { font-size: 0.8rem; }
+
+  /* CTA banner */
+  .cta-banner { padding: 1.5rem; gap: 1.2rem; }
+  .cta-banner h2 { font-size: 1.3rem; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+  .footer-bottom { font-size: 0.8rem; flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+
+  /* Insights */
+  .insight, .insight.featured { padding: 1.4rem; }
+  .insight.featured h3 { font-size: 1.25rem; }
+  .insight h3 { font-size: 1.1rem; }
+  .insight-meta { font-size: 0.78rem; }
+  .filter-chips { gap: 0.4rem; }
+  .filter-chips .chip { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  /* Tighter typography */
+  .hero h1 { font-size: 1.5rem; }
+  .hero-lead { font-size: 0.92rem; }
+  h1 { font-size: 1.55rem; }
+  h2 { font-size: 1.2rem; }
+  .section-tag { font-size: 0.68rem; }
+  .section-tag::before { width: 20px; }
+  .feature-row .feature-eyebrow::before { width: 20px; }
+
+  /* Card content */
+  .card.data { padding: 1.1rem; }
+  .card.data h3 { font-size: 1.05rem; }
+  .card.data > p { font-size: 0.9rem; }
+  .card.data .card-points li { font-size: 0.85rem; padding: 0.55rem 0 0.55rem 1.4rem; }
+
+  /* Highlight block stacks */
+  .highlight-block { grid-template-columns: 1fr; padding: 1.2rem; }
+  .highlight-quote-mark { font-size: 2.4rem; }
+  .highlight-block .highlight-text { font-size: 0.95rem; line-height: 1.55; }
+
+  /* Info panel stats single column */
+  .info-panel .info-stats { grid-template-columns: 1fr; gap: 0.7rem; }
+
+  /* CTA banner */
+  .cta-banner { padding: 1.3rem; }
+  .cta-banner h2 { font-size: 1.2rem; }
+  .cta-banner p { font-size: 0.92rem; }
+  .cta-banner > div:last-child .btn { width: 100%; }
+
+  /* Research teaser */
+  .research-teaser { padding: 1.3rem; }
+  .research-teaser h3 { font-size: 1rem; }
+
+  /* Insights filter chips wrap clean */
+  .filter-chips .chip { font-size: 0.78rem; padding: 0.35rem 0.7rem; }
+
+  /* Hide hero blob on tiny screens to keep layout clean */
+  .hero::after { display: none; }
+  .highlight-block::after { display: none; }
 }
 
 @media (max-width: 480px) {
